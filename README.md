@@ -1,2 +1,2 @@
 # FailurePropagation-GNN
-![Sample](link-to-image)
+![Sample](https://github.com/AmrAbuAbdo/FailurePropagation-GNN/blob/master/sample.png)
