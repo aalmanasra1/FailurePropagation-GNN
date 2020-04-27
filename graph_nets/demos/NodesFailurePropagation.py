@@ -27,6 +27,9 @@ else:
 SEED = 1
 np.random.seed(SEED)
 tf.set_random_seed(SEED)
+GLOBAL_SIZE = 3
+NODE_SIZE = 2
+EDGE_SIZE = 2
 
 def base_graph(n, d):
   print("base_graph")
@@ -164,34 +167,6 @@ def mybase_graph_ge(n):
         nodes_2[index][0] = 1.
         nodes_2[index][1] = 1.
 
-  # # Edge features for graph 0.
-  # edges_2 = [[10., 20.],  # Edge 0
-  #           [11., 21.],  # Edge 1
-  #           [12., 22.],  # Edge 2
-  #           [13., 23.],  # Edge 3
-  #           [14., 24.],  # Edge 4
-  #           [14., 24.],  # Edge 5
-  #           [14., 24.],  # Edge 6
-  #           [15., 25.]]  # Edge 7
-  #
-  # # The sender and receiver nodes associated with each edge for graph 0.
-  # senders_2 = [0,  # Index of the sender node for edge 0
-  #             1,  # Index of the sender node for edge 1
-  #             2,  # Index of the sender node for edge 2
-  #             5,  # Index of the sender node for edge 3
-  #             8,  # Index of the sender node for edge 4
-  #             5,  # Index of the sender node for edge 5
-  #             5,  # Index of the sender node for edge 6
-  #             7]  # Index of the sender node for edge 7
-  # receivers_2 = [1,  # Index of the receiver node for edge 0
-  #               3,  # Index of the receiver node for edge 1
-  #               4,  # Index of the receiver node for edge 2
-  #               3,  # Index of the receiver node for edge 3
-  #               6,  # Index of the receiver node for edge 4
-  #               6,  # Index of the receiver node for edge 5
-  #               2,  # Index of the receiver node for edge 6
-  #               3]  # Index of the sender node for edge 7
-
   # Edge features for graph 0.
   edges_2 = [[10., 20.],  # Edge 0
              [11., 21.],  # Edge 1
@@ -238,188 +213,52 @@ def mybase_graph(n,graph_shape_dist):
                [0.,0.],  # Node 2
                [0.,0.],  # Node 3
                [0.,0.]]  # Node 4
-      # Edge features for graph 0.
-      edges_1 = [[100., 200.],  # Edge 0
-                 [101., 201.],  # Edge 1
-                 [102., 202.],  # Edge 2
-                 [103., 203.],  # Edge 3
-                 [104., 204.],  # Edge 4
-                 [105., 205.]]  # Edge 5
+      num_edges= rand.randint(5,15)
+      edges_1 = np.random.rand(num_edges, EDGE_SIZE).astype(np.float32)
+      senders_1 = np.random.randint(5, size=num_edges, dtype=np.int32)
+      receivers_1 = np.random.randint(5, size=num_edges, dtype=np.int32)
 
-      # The sender and receiver nodes associated with each edge for graph 0.
-      senders_1 = [0,  # Index of the sender node for edge 0
-                   1,  # Index of the sender node for edge 1
-                   1,  # Index of the sender node for edge 2
-                   2,  # Index of the sender node for edge 3
-                   2,  # Index of the sender node for edge 4
-                   3]  # Index of the sender node for edge 5
-      receivers_1 = [1,  # Index of the receiver node for edge 0
-                     2,  # Index of the receiver node for edge 1
-                     3,  # Index of the receiver node for edge 2
-                     0,  # Index of the receiver node for edge 3
-                     4,  # Index of the sender node for edge 4
-                     4]  # Index of the receiver node for edge 5
       nodes_1[n%5][0] = 1.
       nodes_1[n%5][1] = 1.
   elif graph_shape_dist <= 160:
+      num_edges = rand.randint(6, 12)
       nodes_1 = np.zeros((6, 2), dtype=np.float32)
-      edges_1 = [[100., 200.],  # Edge 0
-                 [101., 201.],  # Edge 1
-                 [102., 202.],  # Edge 2
-                 [103., 203.],  # Edge 3
-                 [104., 204.],
-                 [104., 204.],# Edge 4
-                 [105., 205.]]  # Edge 5
+      edges_1 = np.random.rand(num_edges, EDGE_SIZE).astype(np.float32)
+      senders_1 = np.random.randint(6, size=num_edges, dtype=np.int32)
+      receivers_1 = np.random.randint(6, size=num_edges, dtype=np.int32)
 
-      # The sender and receiver nodes associated with each edge for graph 0.
-      senders_1 = [0,  # Index of the sender node for edge 0
-                   1,  # Index of the sender node for edge 1
-                   1,  # Index of the sender node for edge 2
-                   2,  # Index of the sender node for edge 3
-                   2,
-                   5,# Index of the sender node for edge 4
-                   3]  # Index of the sender node for edge 5
-      receivers_1 = [1,  # Index of the receiver node for edge 0
-                     2,  # Index of the receiver node for edge 1
-                     3,  # Index of the receiver node for edge 2
-                     5,  # Index of the receiver node for edge 3
-                     4,
-                     0,# Index of the sender node for edge 4
-                     4]  # Index of the receiver node for edge 5
       nodes_1[n % 6][0] = 1.
       nodes_1[n % 6][1] = 1.
 
   elif graph_shape_dist <= 240:
+      num_edges = rand.randint(7, 18)
       nodes_1 = np.zeros((7, 2), dtype=np.float32)
-      edges_1 = [[100., 200.],  # Edge 0
-                 [101., 201.],  # Edge 1
-                 [102., 202.],  # Edge 2
-                 [103., 203.],  # Edge 3
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],# Edge 4
-                 [105., 205.]]  # Edge 5
+      edges_1 = np.random.rand(num_edges, EDGE_SIZE).astype(np.float32)
+      senders_1 = np.random.randint(7, size=num_edges, dtype=np.int32)
+      receivers_1 = np.random.randint(7, size=num_edges, dtype=np.int32)
 
-      # The sender and receiver nodes associated with each edge for graph 0.
-      senders_1 = [0,  # Index of the sender node for edge 0
-                   1,  # Index of the sender node for edge 1
-                   1,  # Index of the sender node for edge 2
-                   2,  # Index of the sender node for edge 3
-                   4,
-                   6,
-                   5,# Index of the sender node for edge 4
-                   3]  # Index of the sender node for edge 5
-      receivers_1 = [1,  # Index of the receiver node for edge 0
-                     2,  # Index of the receiver node for edge 1
-                     3,  # Index of the receiver node for edge 2
-                     0,  # Index of the receiver node for edge 3
-                     2,
-                     5,
-                     4,# Index of the sender node for edge 4
-                     4]  # Index of the receiver node for edge 5
       nodes_1[n % 7][0] = 1.
       nodes_1[n % 7][1] = 1.
 
   elif graph_shape_dist <= 320:
+      num_edges = rand.randint(8, 20)
       nodes_1 = np.zeros((8, 2), dtype=np.float32)
-      edges_1 = [[100., 200.],  # Edge 0
-                 [101., 201.],  # Edge 1
-                 [102., 202.],  # Edge 2
-                 [103., 203.],  # Edge 3
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],# Edge 4
-                 [105., 205.]]  # Edge 5
+      edges_1 = np.random.rand(num_edges, EDGE_SIZE).astype(np.float32)
+      senders_1 = np.random.randint(8, size=num_edges, dtype=np.int32)
+      receivers_1 = np.random.randint(8, size=num_edges, dtype=np.int32)
 
-      # The sender and receiver nodes associated with each edge for graph 0.
-      senders_1 = [0,  # Index of the sender node for edge 0
-                   1,  # Index of the sender node for edge 1
-                   1,  # Index of the sender node for edge 2
-                   2,  # Index of the sender node for edge 3
-                   2,
-                   3,
-                   3,
-                   3,
-                   7,
-                   5,# Index of the sender node for edge 4
-                   3]  # Index of the sender node for edge 5
-      receivers_1 = [1,  # Index of the receiver node for edge 0
-                     2,  # Index of the receiver node for edge 1
-                     3,  # Index of the receiver node for edge 2
-                     0,  # Index of the receiver node for edge 3
-                     4,
-                     7,
-                     6,
-                     5,
-                     6,
-                     6,# Index of the sender node for edge 4
-                     4]  # Index of the receiver node for edge 5
       nodes_1[n % 8][0] = 1.
       nodes_1[n % 8][1] = 1.
 
   else:
+      num_edges = rand.randint(9, 25)
       nodes_1 = np.zeros((9, 2), dtype=np.float32)
-      edges_1 = [[100., 200.],  # Edge 0
-                 [101., 201.],  # Edge 1
-                 [102., 202.],  # Edge 2
-                 [103., 203.],  # Edge 3
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],
-                 [104., 204.],# Edge 4
-                 [105., 205.]]  # Edge 5
+      edges_1 = np.random.rand(num_edges, EDGE_SIZE).astype(np.float32)
+      senders_1 = np.random.randint(9, size=num_edges, dtype=np.int32)
+      receivers_1 = np.random.randint(9, size=num_edges, dtype=np.int32)
 
-      # The sender and receiver nodes associated with each edge for graph 0.
-      senders_1 = [0,  # Index of the sender node for edge 0
-                   1,  # Index of the sender node for edge 1
-                   3,  # Index of the sender node for edge 2
-                   2,  # Index of the sender node for edge 3
-                   4,
-                   4,
-                   5,
-                   5,
-                   7,
-                   7,
-                   8,# Index of the sender node for edge 4
-                   3]  # Index of the sender node for edge 5
-      receivers_1 = [1,  # Index of the receiver node for edge 0
-                     2,  # Index of the receiver node for edge 1
-                     1,  # Index of the receiver node for edge 2
-                     0,  # Index of the receiver node for edge 3
-                     2,
-                     5,
-                     7,
-                     8,
-                     8,
-                     6,
-                     2,
-                     # Index of the sender node for edge 4
-                     4]  # Index of the receiver node for edge 5
       nodes_1[n][0] = 1.
       nodes_1[n][1] = 1.
-
-  # nodes_1 = [[0., 1., 1., 1., 1.],  # Node 0
-  #            [0., 0., 1., 1., 1.],  # Node 1
-  #            [0., 0., 1., 1., 1.],  # Node 2
-  #            [0., 0., 1., 1., 1.],  # Node 3
-  #            [0., 0., 1., 1., 1.],  # Node 4
-  #            [0., 0., 1., 1., 1.],  # Node 5
-  #            [0., 0., 1., 1., 1.],  # Node 6
-  #            [0., 0., 1., 1., 1.],  # Node 7
-  #            [0., 0., 1., 1., 1.],  # Node 8
-  #            [0., 0., 1., 1., 1.],  # Node 9
-  #            [0., 0., 1., 1., 1.]]  # Node 10
-  
-  # for index, value in enumerate(nodes_1):
-  #     if index == (n%5):
-  #       nodes_1[index][0] = 1.
-  #       nodes_1[index][1] = 1.
   
 
   
@@ -433,6 +272,26 @@ def mybase_graph(n,graph_shape_dist):
   return data_dict_1
 
 
+
+def mybase_graph_randoms(num_nodes, num_edges):
+
+    data_dict = {
+      "globals": np.random.rand(GLOBAL_SIZE).astype(np.float32),
+      "nodes": np.random.rand(num_nodes, NODE_SIZE).astype(np.float32),
+      "edges": np.random.rand(num_edges, EDGE_SIZE).astype(np.float32),
+      "senders": np.random.randint(num_nodes, size=num_edges, dtype=np.int32),
+      "receivers": np.random.randint(num_nodes, size=num_edges, dtype=np.int32),
+    }
+
+    return data_dict
+
+# graph_3_nodes_4_edges = mybase_graph_randoms(num_nodes=3, num_edges=4)
+# graph_5_nodes_8_edges = mybase_graph_randoms(num_nodes=5, num_edges=8)
+# graph_7_nodes_13_edges = mybase_graph_randoms(num_nodes=7, num_edges=13)
+# graph_9_nodes_25_edges = mybase_graph_randoms(num_nodes=9, num_edges=25)
+#
+# graph_dicts = [graph_3_nodes_4_edges, graph_5_nodes_8_edges,
+#                graph_7_nodes_13_edges, graph_9_nodes_25_edges]
 def AnyBlackNode(nodes):
   black_node=False
   for n in nodes:
@@ -471,6 +330,23 @@ def getRespectiveRecievers(senderIndeces, recievers):
   for s in senderIndeces:
     indeces.append(recievers[s])
   return indeces
+
+def random_start_failing_nodes(graph):
+  """
+  Args:
+    graph: graph as a python dictionary
+
+  Returns:
+    new_graph: graph with random start failing nodes
+  """
+  # what if the start failing node has more than one neighbour? then RT =1 is not true
+  new_nodes=graph["nodes"]
+  index_of_failing_node=rand.randint(0,len(new_nodes))
+  new_nodes[index_of_failing_node][0]= 1.
+  new_nodes[index_of_failing_node][1] = 1.
+  graph.replace(nodes=new_nodes)
+
+  return graph
 
 def getBlackNodesWithWhiteNeighboursList(graph):
   """
@@ -548,6 +424,7 @@ def generate_blackwhite_trajectory(bw_static_graph_tr, steps, step_size):
   c=0
   for static_graph in bw_static_graph_tr:
     graph = static_graph
+    # graph = random_start_failing_nodes(graph)
     graph_steps=[]
     graph_steps.append(graph)
     for i in range(1,steps+1):
@@ -567,7 +444,9 @@ def generate_blackwhite_trajectory(bw_static_graph_tr, steps, step_size):
             NumberOfWhiteNeighbours=len(WNList)
             for wn in WNList:
               nodes[wn][0]=1
-              nodes[wn][1]=NumberOfWhiteNeighbours
+              # nodes[wn][1]=NumberOfWhiteNeighbours
+              # nodes[wn][1] = rand.randint(0,3)
+              nodes[wn][1] = 1
             last_graph["nodes"]=copy.deepcopy(nodes)
             graph_steps.append(last_graph)
       else:
@@ -611,11 +490,11 @@ def create_loss_ops(target_op, output_ops):
     A list of loss values (tf.Tensor), one per output op.
   """
   # target_op[..., 2:4] = tf.Print(target_op[..., 2:4], [target_op[..., 2:4]], message="target_op[..., 2:4]: ")
-  # loss_ops = [
-  #     tf.reduce_mean(
-  #         tf.reduce_sum((output_op.nodes[..., 0:1] - target_op[..., 0:1])**2, axis=-1))
-  #     for output_op in output_ops
-  # ]
+  loss_ops = [
+      tf.reduce_mean(
+          tf.reduce_sum((output_op.nodes[..., 0:2] - target_op[..., 0:2])**2, axis=-1))
+      for output_op in output_ops
+  ]
   # isHealthy_diff_count=0
   # for node,target_node in zip(output_ops[0].nodes,target_op):
   #     res=node[..., 0:1]-target_node[..., 0:1]
@@ -633,12 +512,12 @@ def create_loss_ops(target_op, output_ops):
   # ]
   # loss_ops = isHealthy_error + RT_error
   # loss_ops = isHealthy_diff_count
-  bce = tf.keras.losses.binary_crossentropy
-
-  loss_ops = [
-        bce(target_op[..., 0:2], output_op.nodes[..., 0:2])
-      for output_op in output_ops
-  ]
+  # bce = tf.keras.losses.binary_crossentropy
+  #
+  # loss_ops = [
+  #       bce(target_op[..., 0:2], output_op.nodes[..., 0:2])
+  #     for output_op in output_ops
+  # ]
   return loss_ops
 
 
@@ -708,8 +587,8 @@ num_processing_steps_tr = 1
 num_processing_steps_ge = 1
 
 # Data / training parameters.
-
-num_training_iterations = 10000
+# num_training_iterations = 5000
+num_training_iterations = 5000
 num_time_steps = 10
 step_size = 0.1
 
@@ -724,8 +603,8 @@ model = models.EncodeProcessDecode(node_output_size=2)
 possible_black_node_index_tr = (0, 8)
 possible_black_node_index_ge = (0, 5)
 # possible_black_node_index_ge = (0, 9)
-bw_batch_size_tr=400
-bw_batch_size_ge=50
+bw_batch_size_tr=1500
+bw_batch_size_ge=200
 first_black_nodes_tr = rand.randint(*possible_black_node_index_tr, size=bw_batch_size_tr)
 first_black_nodes_ge = rand.randint(*possible_black_node_index_ge, size=bw_batch_size_ge)
 
@@ -735,6 +614,10 @@ dist_count=0
 for i in first_black_nodes_tr:
   bw_static_graph_tr.append(mybase_graph(i, dist_count))
   dist_count+=1
+
+
+# for i in first_black_nodes_tr:
+#   bw_static_graph_tr.append(mybase_graph_randoms(num_nodes=rand.randint(5, 10), num_edges=rand.randint(7, 10)))
 
 
 print("<---bw_static_graph_tr--->")
@@ -783,9 +666,13 @@ print("<---right after generate_blackwhite_trajectory training--->")
 #     plt.show()
 # generalization
 bw_static_graph_ge = []
-for j in first_black_nodes_ge:
-  bw_static_graph_ge.append(mybase_graph_ge(j))
+# for j in first_black_nodes_ge:
+#   bw_static_graph_ge.append(mybase_graph_ge(j))
 
+dist_count_ge=0
+for i in first_black_nodes_ge:
+  bw_static_graph_ge.append(mybase_graph(i, dist_count_ge))
+  dist_count_ge+=1
 
 # Training.
 
@@ -806,18 +693,18 @@ test_initials , predicted_nodes_rollout_9_ge, visualization_predicted_nodes_roll
 #     plot_graphs_tuple_np(first_six_graphs_np,2)
 #     plt.show()
 
-print("len(visualization_true_nodes_rollout_9_ge))")
-print(len(visualization_true_nodes_rollout_9_ge))
-print("len(visualization_true_nodes_rollout_9_ge[5]))")
-print(len(visualization_true_nodes_rollout_9_ge[5]))
+# print("len(visualization_true_nodes_rollout_9_ge))")
+# print(len(visualization_true_nodes_rollout_9_ge))
+# print("len(visualization_true_nodes_rollout_9_ge[5]))")
+# print(len(visualization_true_nodes_rollout_9_ge[5]))
 
 
 
 # Test/generalization loss: 9-nodes.
 loss_op_9_ge = tf.reduce_mean(
     tf.reduce_sum(
-        (predicted_nodes_rollout_9_ge[..., 0:1] -
-         true_nodes_rollout_9_ge[..., 0:1])**2,
+        (predicted_nodes_rollout_9_ge[..., 0:2] -
+         true_nodes_rollout_9_ge[..., 0:2])**2,
         axis=-1))
 print("<---loss_op_9_ge--->")
 print(loss_op_9_ge)
@@ -853,6 +740,7 @@ print(loss_op_tr)
 
 # Optimizer.
 learning_rate = 1e-3
+# learning_rate = 1
 optimizer = tf.train.AdamOptimizer(learning_rate)
 step_op = optimizer.minimize(loss_op_tr)
 
@@ -961,11 +849,11 @@ ax.plot(x, y, "k")
 ax.set_title("Generalization loss: 9 nodes")
 
 
-# # Visualize trajectories.
-true_rollouts_9 = get_node_trajectories(test_values["true_rollout_9"],
-                                        bw_batch_size_ge)
-predicted_rollouts_9 = get_node_trajectories(test_values["predicted_rollout_9"],
-                                             bw_batch_size_ge)
+# # # Visualize trajectories.
+# true_rollouts_9 = get_node_trajectories(test_values["true_rollout_9"],
+#                                         bw_batch_size_ge)
+# predicted_rollouts_9 = get_node_trajectories(test_values["predicted_rollout_9"],
+#                                              bw_batch_size_ge)
 
 print("visualization_true_nodes_rollout_9_ge")
 print(visualization_true_nodes_rollout_9_ge)
@@ -1020,14 +908,7 @@ for example_number in range(0, 5):  # first 10 examples
     plot_graphs_tuple_np(first_six_graphs_pred_np,2)
     plt.show()
 
-for example_number in range(15, 25):  # first 10 examples
-    test = utils_np.data_dicts_to_graphs_tuple(visualization_true_nodes_rollout_9_ge[example_number])
-    test2 = utils_np.data_dicts_to_graphs_tuple(prediction_over_time[example_number])
-    first_six_graphs_pred_np = utils_np.get_graph(test, slice(0, 10))
-    plot_graphs_tuple_np(first_six_graphs_pred_np, 1)
-    first_six_graphs_pred_np = utils_np.get_graph(test2, slice(0, 10))
-    plot_graphs_tuple_np(first_six_graphs_pred_np, 2)
-    plt.show()
+
 for example_number in range(40, 50):  # first 10 examples
     test = utils_np.data_dicts_to_graphs_tuple(visualization_true_nodes_rollout_9_ge[example_number])
     test2 = utils_np.data_dicts_to_graphs_tuple(prediction_over_time[example_number])
